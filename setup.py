@@ -11,6 +11,8 @@ setup(
         "fastapi",
         "pydantic",
         "uvicorn"
+        "pytest",
+        "pytest-mock",
     ],
     entry_points={
         "console_scripts": [
