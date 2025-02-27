@@ -10,7 +10,7 @@ setup(
         "python-dotenv==1.0.1",
         "fastapi",
         "pydantic",
-        "uvicorn"
+        "uvicorn",
         "pytest",
         "pytest-mock",
     ],
