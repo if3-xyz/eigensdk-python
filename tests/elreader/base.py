@@ -2,17 +2,12 @@ import logging
 from web3 import Web3
 from eth_typing import Address
 from elreader import ELReader  # Ensure this imports your ELReader class
-from elwriter import ELWriter
 from txmanager import TxManager
-from web3.middleware import geth_poa_middleware
 import json
 
 # Setup Web3 Connection to Anvil
 ANVIL_RPC_URL = "http://127.0.0.1:8545"  # Adjust if using a different port
 w3 = Web3(Web3.HTTPProvider(ANVIL_RPC_URL))
-
-# Add middleware to support PoA chains (if required)
-w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 
 # Contract Addresses
 CONTRACT_ADDRESSES = {
@@ -93,16 +88,3 @@ PRIVATE_KEY = "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff8
 
 tx_mgr = TxManager(w3, SENDER_ADDRESS, PRIVATE_KEY)
 
-el_writer = ELWriter(
-    allocation_manager=allocation_manager,
-    avs_directory=avs_directory,
-    delegation_manager=delegation_manager,
-    permissioncontrol=permission_control,
-    reward_cordinator=rewards_coordinator,
-    strategy_manager=strategy_manager,
-    logger=logging.getLogger(),
-    eth_http_client=w3,
-    tx_mgr=tx_mgr,  # Pass tx_mgr here
-    # strategy_abi=ISTRATEGY,
-    # erc20_abi=IERC20,
-)
